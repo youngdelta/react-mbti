@@ -21,9 +21,9 @@ class Routes extends React.Component {
 					element={<Home />}
 				/>
 				<Route
-					exact
+					// exact
 					path="/questions"
-					component={Questions}
+					element={<Questions />}
 				/>
 				<Route
 					exact
