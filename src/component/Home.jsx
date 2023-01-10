@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../js/share.js';
+import Routers from '../route/Routers';
 
 class Home extends Component {
 	state = {};
