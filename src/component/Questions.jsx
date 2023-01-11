@@ -34,10 +34,8 @@ class Questions extends React.Component {
 	}
 
 	renderQuestion() {
+		// console.log('questions========>		', questions);
 		const question = questions?.[this.state.currentNumber] || {};
-		console.log(this.props);
-		console.log(this.store);
-		console.log('store : ', store);
 
 		this.setState({
 			// currentNumber: question?.number || 0,
@@ -49,30 +47,17 @@ class Questions extends React.Component {
 				width: `${(this.state.currentNumber + 1) * 10}%`,
 			},
 		});
-
-		// this.numberElTxt = question?.number || 0;
-		// this.questionElTxt = question?.question || '';
-		// this.choice1ElTxt = question?.choices?.[0]?.text || '';
-		// this.choice2ElTxt = question?.choices?.[1]?.text || '';
-
-		// this.$refs.refProgressValue.style.width = `${(this.currentNumber + 1) * 10}%`;
 	}
 
 	onClickChoice(val) {
-		// console.log('🚀 ~ file: QuestionsView.vue:56 ~ onClickChoice ~ val  : ', val);
-		// const choiceNum = e.target.classList.contains('choice1') ? 0 : 1;
-		const newMbti = (this.state.mbti += questions?.[this.currentNumber]?.choices?.[val]?.value || '');
+		this.setState({ mbti: this.state.mbti + questions?.[this.state.currentNumber]?.choices?.[val]?.value || '' });
 
-		this.setState({ mbti: newMbti });
+		console.log('🚀 ~ file: questions.js:44 ~ eventListener ~ mbti : ', { ...this.state });
 
-		// this.mbti += questions?.[this.currentNumber]?.choices?.[val]?.value || '';
-		console.log('🚀 ~ file: questions.js:44 ~ eventListener ~ mbti : ', this.state.mbti);
-		/* 
 		if (this.state.currentNumber === questions.length - 1) {
 			this.showResultPage();
 			return;
 		}
-        */
 
 		// this.currentNumber++;
 		this.setState({ currentNumber: ++this.state.currentNumber }, () => {
@@ -81,7 +66,7 @@ class Questions extends React.Component {
 	}
 
 	showResultPage() {
-		// window.location.href = `/result?mbti=${this.mbti}`;
+		window.location.href = `/result?mbti=${this.state.mbti}`;
 		// this.$router.push({ name: 'ResultView', query: { mbti: this.mbti } });
 		// this.props.navigate(`/result?mbti=${this.state.mbti}`);
 		// reducer.navigate(`/result?mbti=${this.state.mbti}`);
@@ -90,18 +75,10 @@ class Questions extends React.Component {
 	}
 
 	render() {
-		/* 
-		const tempStyle = {
-			width: `${(this.state.currentNumber || this.state.currentNumber + 1) * 10}%`,
-		};
-        console.log('🚀 ~ file: Questions.jsx:82 ~ Questions ~ render ~ this.state.currentNumber', this.state.currentNumber, (this.state.currentNumber || this.state.currentNumber + 1) * 10);
-        */
-		console.log('🚀 ~ file: Questions.jsx:82 ~ Questions ~ render ~ this.state.currentNumber', this.state.currentNumber);
-
 		return (
 			<>
 				{this.state.currentNumber && this.state.currentNumber > 9 ? (
-					<Result />
+					<Result mbti={this.state.mbti} />
 				) : (
 					<>
 						<div className="progress">
