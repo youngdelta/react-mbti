@@ -1,7 +1,8 @@
 import React from 'react';
 import { questions } from '../js/data.js';
 import store from '../store/store.js';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Result from './Result.jsx';
 // import { reducer } from '../store/store';
 
 class Questions extends React.Component {
@@ -66,10 +67,12 @@ class Questions extends React.Component {
 
 		// this.mbti += questions?.[this.currentNumber]?.choices?.[val]?.value || '';
 		console.log('🚀 ~ file: questions.js:44 ~ eventListener ~ mbti : ', this.state.mbti);
+		/* 
 		if (this.state.currentNumber === questions.length - 1) {
 			this.showResultPage();
 			return;
 		}
+        */
 
 		// this.currentNumber++;
 		this.setState({ currentNumber: ++this.state.currentNumber }, () => {
@@ -83,7 +86,7 @@ class Questions extends React.Component {
 		// this.props.navigate(`/result?mbti=${this.state.mbti}`);
 		// reducer.navigate(`/result?mbti=${this.state.mbti}`);
 		// this.props.store.navigate(`/result?mbti=${this.state.mbti}`);
-		store.dispatch(`/result?mbti=${this.state.mb}`);
+		// store.dispatch(`/result?mbti=${this.state.mbti}`);
 	}
 
 	render() {
@@ -91,30 +94,37 @@ class Questions extends React.Component {
 		const tempStyle = {
 			width: `${(this.state.currentNumber || this.state.currentNumber + 1) * 10}%`,
 		};
-		console.log('🚀 ~ file: Questions.jsx:82 ~ Questions ~ render ~ this.state.currentNumber', this.state.currentNumber, (this.state.currentNumber || this.state.currentNumber + 1) * 10);
+        console.log('🚀 ~ file: Questions.jsx:82 ~ Questions ~ render ~ this.state.currentNumber', this.state.currentNumber, (this.state.currentNumber || this.state.currentNumber + 1) * 10);
         */
+		console.log('🚀 ~ file: Questions.jsx:82 ~ Questions ~ render ~ this.state.currentNumber', this.state.currentNumber);
 
 		return (
 			<>
-				<div className="progress">
-					<div
-						className="value"
-						style={this.state.progressStyle}></div>
-				</div>
-				<div className="question-box">
-					<div className="number">{this.state.numberElTxt}</div>
-					<div
-						className="question"
-						v-html="questionElTxt"></div>
-					<div
-						className="btn btn-gray choice choice1"
-						onClick={() => this.onClickChoice(0)}
-						dangerouslySetInnerHTML={{ __html: this.state.choice1ElTxt }}></div>
-					<div
-						className="btn btn-gray choice choice2"
-						onClick={() => this.onClickChoice(1)}
-						dangerouslySetInnerHTML={{ __html: this.state.choice2ElTxt }}></div>
-				</div>
+				{this.state.currentNumber && this.state.currentNumber > 9 ? (
+					<Result />
+				) : (
+					<>
+						<div className="progress">
+							<div
+								className="value"
+								style={this.state.progressStyle}></div>
+						</div>
+						<div className="question-box">
+							<div className="number">{this.state.numberElTxt}</div>
+							<div
+								className="question"
+								v-html="questionElTxt"></div>
+							<div
+								className="btn btn-gray choice choice1"
+								onClick={() => this.onClickChoice(0)}
+								dangerouslySetInnerHTML={{ __html: this.state.choice1ElTxt }}></div>
+							<div
+								className="btn btn-gray choice choice2"
+								onClick={() => this.onClickChoice(1)}
+								dangerouslySetInnerHTML={{ __html: this.state.choice2ElTxt }}></div>
+						</div>
+					</>
+				)}
 			</>
 		);
 	}

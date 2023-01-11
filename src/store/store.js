@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { createStore } from '../store/navigateSlice';
 
 const initialState = {
-	navigate: null,
+	navigate: useNavigate,
 };
 
 const reducer = (state = initialState, action) => {
