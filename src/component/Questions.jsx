@@ -77,31 +77,25 @@ class Questions extends React.Component {
 	render() {
 		return (
 			<>
-				{this.state.currentNumber && this.state.currentNumber > 9 ? (
-					<Result mbti={this.state.mbti} />
-				) : (
-					<>
-						<div className="progress">
-							<div
-								className="value"
-								style={this.state.progressStyle}></div>
-						</div>
-						<div className="question-box">
-							<div className="number">{this.state.numberElTxt}</div>
-							<div
-								className="question"
-								v-html="questionElTxt"></div>
-							<div
-								className="btn btn-gray choice choice1"
-								onClick={() => this.onClickChoice(0)}
-								dangerouslySetInnerHTML={{ __html: this.state.choice1ElTxt }}></div>
-							<div
-								className="btn btn-gray choice choice2"
-								onClick={() => this.onClickChoice(1)}
-								dangerouslySetInnerHTML={{ __html: this.state.choice2ElTxt }}></div>
-						</div>
-					</>
-				)}
+				<div className="progress">
+					<div
+						className="value"
+						style={this.state.progressStyle}></div>
+				</div>
+				<div className="question-box">
+					<div className="number">{this.state.numberElTxt}</div>
+					<div
+						className="question"
+						v-html="questionElTxt"></div>
+					<div
+						className="btn btn-gray choice choice1"
+						onClick={() => this.onClickChoice(0)}
+						dangerouslySetInnerHTML={{ __html: this.state.choice1ElTxt }}></div>
+					<div
+						className="btn btn-gray choice choice2"
+						onClick={() => this.onClickChoice(1)}
+						dangerouslySetInnerHTML={{ __html: this.state.choice2ElTxt }}></div>
+				</div>
 			</>
 		);
 	}
