@@ -1,11 +1,14 @@
 import React from 'react';
 import { questions } from '../js/data.js';
-import { useNavigate } from 'react-router-dom';
+import store from '../store/store.js';
+// import { useNavigate } from 'react-router-dom';
+// import { reducer } from '../store/store';
 
 class Questions extends React.Component {
 	constructor(props) {
 		super(props);
-		// this.yourFunctionHere = this.yourFunctionHere.bind(this);
+		// this.showResultPage = this.showResultPage.bind(this);
+		console.log('Questions props===>   ', props);
 	}
 
 	state = {
@@ -31,8 +34,9 @@ class Questions extends React.Component {
 
 	renderQuestion() {
 		const question = questions?.[this.state.currentNumber] || {};
-		console.log(question);
-		console.log(question?.number || 0);
+		console.log(this.props);
+		console.log(this.store);
+		console.log('store : ', store);
 
 		this.setState({
 			// currentNumber: question?.number || 0,
@@ -76,14 +80,19 @@ class Questions extends React.Component {
 	showResultPage() {
 		// window.location.href = `/result?mbti=${this.mbti}`;
 		// this.$router.push({ name: 'ResultView', query: { mbti: this.mbti } });
-		this.props.navigate(`/result?mbti=${this.state.mbti}`);
+		// this.props.navigate(`/result?mbti=${this.state.mbti}`);
+		// reducer.navigate(`/result?mbti=${this.state.mbti}`);
+		// this.props.store.navigate(`/result?mbti=${this.state.mbti}`);
+		store.dispatch(`/result?mbti=${this.state.mb}`);
 	}
 
 	render() {
+		/* 
 		const tempStyle = {
 			width: `${(this.state.currentNumber || this.state.currentNumber + 1) * 10}%`,
 		};
 		console.log('🚀 ~ file: Questions.jsx:82 ~ Questions ~ render ~ this.state.currentNumber', this.state.currentNumber, (this.state.currentNumber || this.state.currentNumber + 1) * 10);
+        */
 
 		return (
 			<>

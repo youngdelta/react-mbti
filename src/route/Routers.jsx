@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import App from '../App';
 import Home from '../component/Home';
 import Questions from '../component/Questions';
 import Result from '../component/Result';
@@ -20,6 +21,11 @@ class Routers extends React.Component {
 					<Route
 						exact={true}
 						path="/"
+						element={<App />}
+					/>
+					<Route
+						exact={true}
+						path="/home"
 						element={<Home />}
 					/>
 					<Route
@@ -40,4 +46,5 @@ class Routers extends React.Component {
 	}
 }
 
-export default withRouter(Routers);
+// export default withRouter(Routers);
+export default Routers;
