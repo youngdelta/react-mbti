@@ -4,6 +4,7 @@ import Home from './component/Home';
 import Routers from './route/Routers';
 
 // import Home from './component/Home';
+// import { withRouter } from './route/WithRouter';
 
 function App() {
 	// return <Home />;
@@ -12,4 +13,5 @@ function App() {
 	return <Home />;
 }
 
+// export default withRouter(App);
 export default App;

@@ -1,14 +1,22 @@
 import React from 'react';
 import { questions } from '../js/data.js';
+import { useNavigate } from 'react-router-dom';
 
 class Questions extends React.Component {
+	constructor(props) {
+		super(props);
+		// this.yourFunctionHere = this.yourFunctionHere.bind(this);
+	}
+
 	state = {
 		mbti: '',
-		currentNumber: 1,
+		currentNumber: 0,
 		question: {},
 		numberElTxt: 1,
 		choice1ElTxt: '',
 		choice2ElTxt: '',
+		progressStyle: {},
+		// navigate: useNavigate(),
 	};
 
 	componentDidMount() {
@@ -32,6 +40,9 @@ class Questions extends React.Component {
 			numberElTxt: question?.number || 0,
 			choice1ElTxt: question?.choices?.[0]?.text || '',
 			choice2ElTxt: question?.choices?.[1]?.text || '',
+			progressStyle: {
+				width: `${(this.state.currentNumber + 1) * 10}%`,
+			},
 		});
 
 		// this.numberElTxt = question?.number || 0;
@@ -51,7 +62,7 @@ class Questions extends React.Component {
 
 		// this.mbti += questions?.[this.currentNumber]?.choices?.[val]?.value || '';
 		console.log('🚀 ~ file: questions.js:44 ~ eventListener ~ mbti : ', this.state.mbti);
-		if (this.state.currentNumber === questions.length) {
+		if (this.state.currentNumber === questions.length - 1) {
 			this.showResultPage();
 			return;
 		}
@@ -65,22 +76,24 @@ class Questions extends React.Component {
 	showResultPage() {
 		// window.location.href = `/result?mbti=${this.mbti}`;
 		// this.$router.push({ name: 'ResultView', query: { mbti: this.mbti } });
+		this.props.navigate(`/result?mbti=${this.state.mbti}`);
 	}
 
 	render() {
 		const tempStyle = {
-			width: `${this.state.currentNumber * 10}%`,
+			width: `${(this.state.currentNumber || this.state.currentNumber + 1) * 10}%`,
 		};
+		console.log('🚀 ~ file: Questions.jsx:82 ~ Questions ~ render ~ this.state.currentNumber', this.state.currentNumber, (this.state.currentNumber || this.state.currentNumber + 1) * 10);
 
 		return (
 			<>
 				<div className="progress">
 					<div
 						className="value"
-						style={tempStyle}></div>
+						style={this.state.progressStyle}></div>
 				</div>
 				<div className="question-box">
-					<div className="number">{this.state.currentNumber}</div>
+					<div className="number">{this.state.numberElTxt}</div>
 					<div
 						className="question"
 						v-html="questionElTxt"></div>

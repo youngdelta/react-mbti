@@ -3,15 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useNavigate } from 'react-router-dom';
 import Routers from './route/Routers';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
-		<Routers>
-			<App />
-		</Routers>
+		<Provider store={store}>
+			<Routers>
+				<App />
+			</Routers>
+		</Provider>
 	</React.StrictMode>,
 );
 
