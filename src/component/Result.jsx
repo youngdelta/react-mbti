@@ -1,6 +1,6 @@
 import React from 'react';
 import { results, mbtis } from '../js/data.js';
-import '../js/share.js';
+import * as share from '../js/share.js';
 
 class Result extends React.Component {
 	constructor(props) {
@@ -34,7 +34,7 @@ class Result extends React.Component {
 			title: result.title,
 			characterSrc: `.${result.character}`,
 			lectureImg: `.${result.lectureImg}`,
-			lectureHref: `${result.lectureUrl}`,
+			lectureHref: result.lectureUrl,
 			results: result.results,
 			jobs: result.jobs,
 		});
@@ -77,9 +77,10 @@ class Result extends React.Component {
 				<div className="result">
 					<h3>이런 직업 강의는 어떤가요?</h3>
 					<a
-						href="lectureHref"
+						href={this.state.lectureHref}
 						target="_blank"
-						className="lecture">
+						className="lecture"
+						rel="noreferrer">
 						<img
 							src={this.state.lectureImg}
 							alt="강의"
@@ -87,7 +88,11 @@ class Result extends React.Component {
 					</a>
 				</div>
 
-				<div className="btn btn-green btn-small share-or-copy">결과 공유하기</div>
+				<div
+					className="btn btn-green btn-small share-or-copy"
+					onClick={share.onShare}>
+					결과 공유하기
+				</div>
 				<a
 					href="/"
 					className="btn btn-gray btn-small">

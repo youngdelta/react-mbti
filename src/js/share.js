@@ -1,9 +1,9 @@
 const btnEl = document.querySelector('.share-or-copy');
 
 // 각 지원 기능 확인!
-const isSupportedShare = !!navigator?.share;
-const isSupportedClipboard = !!navigator?.clipboard;
-const isSupportedClipboardCommand = document.queryCommandSupported?.('copy');
+export const isSupportedShare = !!navigator?.share;
+export const isSupportedClipboard = !!navigator?.clipboard;
+export const isSupportedClipboardCommand = document.queryCommandSupported?.('copy');
 
 // 공유 및 복사 기능 상태 체크!
 const healthEl = document.createElement('div');
@@ -12,7 +12,7 @@ healthEl.innerHTML = `s: ${isSupportedShare}, c: ${isSupportedClipboard}, cc: ${
 document.body.append(healthEl);
 
 // 모바일 브라우저 내장 공유 기능!
-async function startNativeShare() {
+export async function startNativeShare() {
 	await navigator.share({
 		title: '내 안에 숨어있는 직업캐 찾기!',
 		text: '누구나 찰떡인 직업이 있어요! 내 안에 숨어있는 직업캐를 찾아보세요!',
@@ -21,7 +21,7 @@ async function startNativeShare() {
 }
 
 // 주소 복사 기능!
-async function copyToClipboard() {
+export async function copyToClipboard() {
 	// 레거시 우선!
 	if (isSupportedClipboardCommand) {
 		const textarea = document.createElement('textarea');
@@ -60,3 +60,17 @@ btnEl?.addEventListener('click', async () => {
 		await copyToClipboard();
 	}
 });
+
+/**
+ *
+ * @returns
+ */
+export const onShare = async () => {
+	if (isSupportedShare) {
+		await startNativeShare();
+		return;
+	}
+	if (isSupportedClipboard || isSupportedClipboardCommand) {
+		await copyToClipboard();
+	}
+};

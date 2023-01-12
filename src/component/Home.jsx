@@ -1,10 +1,13 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
-import '../js/share.js';
+// import share from '../js/share.js';
+import * as share from '../js/share.js';
+// const share = require('../js/share.js');
 // import Routers from '../route/Routers';
 
 class Home extends Component {
 	state = {};
+
 	render() {
 		return (
 			<>
@@ -25,7 +28,11 @@ class Home extends Component {
 					to="/questions">
 					본캐 찾으러 GO!
 				</Link>
-				<div className="btn btn-green btn-small share-or-copy">주변에 알리기</div>
+				<div
+					className="btn btn-green btn-small share-or-copy"
+					onClick={share.onShare}>
+					주변에 알리기
+				</div>
 			</>
 		);
 	}
